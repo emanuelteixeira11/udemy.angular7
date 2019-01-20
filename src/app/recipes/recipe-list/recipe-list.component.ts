@@ -8,16 +8,12 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-list.component.css']
 })
 
-export class RecipeListComponent {
-  @Output() recipeSelected = new EventEmitter<Recipe>();
-
+export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
 
-  constructor(private recipeService: RecipeService) {
-    this.recipes = recipeService.recipes;
-  }
+  constructor(private recipeService: RecipeService) {}
 
-  public onRecipeSelected(recipe: Recipe) {
-    this.recipeSelected.emit(recipe);
+  ngOnInit() {
+    this.recipes = this.recipeService.getRecipes();
   }
 }
